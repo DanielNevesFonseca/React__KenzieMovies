@@ -1,0 +1,39 @@
+.btn-md,
+.btn-sm {
+  border-radius: 255px;
+  background-color: var(--color-primary);
+  font-family: var(--font-title);
+  transition: ease-in-out .3s;
+  
+  &:hover{
+    background-color: var(--color-primary-hover);
+    color: var(--color-grey-2);
+  }
+}
+
+.btn-sm {
+  padding: 6px 16px;
+}
+
+.btn-md {
+  padding: 12px 32px;
+}
+
+.link, a{
+  text-decoration: none;
+  font-family: var(--font-title);
+  font-size: 14px;
+  color: var(--color-primary);
+
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+a:active{
+  color: var(--color-primary-hover);
+}
+
+a:visited{
+  color: var(--color-primary-hover);
+}

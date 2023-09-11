@@ -1,0 +1,17 @@
+:root{
+  --color-primary: #FFBB38;
+  --color-primary-hover: #fcc765;
+  --color-grey-1: #3D3D3D;
+  --color-grey-2: #171717;
+  --color-white: #FFF;
+  --color-black: #000;
+  --font-title: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+  body,html{
+  min-height: 100dvh;
+  min-width: 100%;
+  background-color: var(--color-grey-2);
+
+}
