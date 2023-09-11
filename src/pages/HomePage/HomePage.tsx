@@ -4,6 +4,7 @@ export const HomePage = () => {
   return(
     <TemplatePage>
       <section>
+        
       </section>
     </TemplatePage>
   )
