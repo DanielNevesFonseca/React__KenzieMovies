@@ -12,7 +12,7 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
       const { data } = await kenzieMovieApi.get<IMovie[]>(
         "/movies?_embed=reviews"
       );
-      console.log(data);
+      // console.log(data);
       return data;
     },
   });
