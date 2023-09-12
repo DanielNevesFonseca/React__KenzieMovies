@@ -1,16 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import { createContext } from "react";
+import { kenzieMovieApi } from "../../services/kenzieMovieApi";
+import { IMovie, IMoviesContext, IMoviesProviderProps } from "./@types";
 
-interface IMoviesContextProps{
-  children: React.ReactNode;
-}
+export const MoviesContext = createContext({} as IMoviesContext);
 
-export const MoviesContext = createContext({});
+export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
+  const { data: moviesList } = useQuery({
+    queryKey: ["movies"],
+    queryFn: async () => {
+      const { data } = await kenzieMovieApi.get<IMovie[]>(
+        "/movies?_embed=reviews"
+      );
+      console.log(data);
+      return data;
+    },
+  });
 
-export const MoviesProvider = ({children}: IMoviesContextProps) => {
-  
-  return(
-    <MoviesContext.Provider value={{}}>
+  return (
+    <MoviesContext.Provider value={{ moviesList }}>
       {children}
     </MoviesContext.Provider>
-  )
-}
+  );
+};

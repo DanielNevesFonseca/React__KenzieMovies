@@ -32,6 +32,7 @@
   background-color: var(--color-primary);
   border-radius: 255px;
   cursor: default;
+  text-transform: capitalize;
   
   @media (max-width: 768px) {
     padding: 4px 22px;

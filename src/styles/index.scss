@@ -12,9 +12,11 @@
   flex-direction: column;
   align-items: center;
   padding: 0 16px;
+  padding-bottom: calc(55px + 80px);
+  gap: 26px;
 }
 
 .container{
-  max-width: 1328px;
+  max-width: 1024px;
   width: 100%;
 }
