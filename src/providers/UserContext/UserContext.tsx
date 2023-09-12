@@ -9,6 +9,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { kenzieMovieApi } from "../../services/kenzieMovieApi";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const UserContext = createContext({} as IUserContext);
 
@@ -26,10 +27,11 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         JSON.stringify(response.data.accessToken)
       );
         navigate("/")
+        toast.success("Logged successfully!");
       return response.data;
     },
     onError: (error: IErrorObject) => {
-      alert(error.response.data);
+      toast.error(error.response.data);
     },
   });
 
