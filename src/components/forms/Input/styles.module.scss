@@ -1,0 +1,11 @@
+.inputBox{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  & > span {
+    color:var(--color-primary);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+  }
+}
