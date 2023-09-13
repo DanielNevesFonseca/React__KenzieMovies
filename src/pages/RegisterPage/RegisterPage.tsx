@@ -9,13 +9,13 @@ export const RegisterPage = () => {
       <main>
         <section>
           <div>
-            <h1 className="title1">Cadastro</h1>
+            <h1 className="title1">Register</h1>
             <Link className="link" to={"/login"}>
               <FiArrowLeft size={24} />
-              Voltar
+              Back
             </Link>
           </div>
-          <p className="text">Preencha os campos para cadastrar-se</p>
+          <p className="text">Fill the fields below to register</p>
           <RegisterForm/>
         </section>
       </main>

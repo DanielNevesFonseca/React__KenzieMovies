@@ -3,8 +3,13 @@ import { Input } from "../Input/Input";
 import { InputPassword } from "../InputPassword/InputPassword";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterFormSchema, TRegisterFormValues } from "./RegisterFormSchema";
+import { useContext } from "react";
+import { UserContext } from "../../../providers/UserContext/UserContext";
 
 export const RegisterForm = () => {
+
+  const {postUserRegister} = useContext(UserContext)
+
   const {
     register,
     handleSubmit,
@@ -14,7 +19,7 @@ export const RegisterForm = () => {
   });
 
   const submit: SubmitHandler<TRegisterFormValues> = (formData) => {
-    console.log(formData);
+    postUserRegister.mutate(formData);
   };
 
   return (
@@ -46,7 +51,7 @@ export const RegisterForm = () => {
         {...register("confirm_password")}
       />
       <button className="btn-md" type="submit">
-        Cadastrar-se
+        Register
       </button>
     </form>
   );

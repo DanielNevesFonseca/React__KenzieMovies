@@ -2,9 +2,15 @@ import { UseMutationResult } from "react-query";
 
 export interface IUserContext {
   postUserLogin: UseMutationResult<
-    ILoginResponseSuccess,
+    IResponseSuccess,
     IErrorObject,
-    IFormData,
+    ILoginFormData,
+    unknown
+  >;
+  postUserRegister: UseMutationResult<
+    IResponseSuccess,
+    IErrorObject,
+    IRegisterFormData,
     unknown
   >;
 }
@@ -12,12 +18,16 @@ export interface IUserProviderProps {
   children: React.ReactNode;
 }
 
-export interface IFormData {
+export interface ILoginFormData {
+  email: string;
+  password: string;
+}
+export interface IRegisterFormData {
   email: string;
   password: string;
 }
 
-export interface ILoginResponseSuccess {
+export interface IResponseSuccess {
   accessToken(arg0: string, accessToken: any): unknown;
   data: ILoginData;
   status: number;

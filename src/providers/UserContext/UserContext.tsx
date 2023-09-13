@@ -1,8 +1,9 @@
 import { createContext } from "react";
 import {
   IErrorObject,
-  IFormData,
-  ILoginResponseSuccess,
+  ILoginFormData,
+  IRegisterFormData,
+  IResponseSuccess,
   IUserContext,
   IUserProviderProps,
 } from "./@types";
@@ -17,8 +18,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const navigate = useNavigate();
 
   const postUserLogin = useMutation({
-    mutationFn: async (formData: IFormData) => {
-      const response = await kenzieMovieApi.post<ILoginResponseSuccess>(
+    mutationFn: async (formData: ILoginFormData) => {
+      const response = await kenzieMovieApi.post<IResponseSuccess>(
         "/login",
         formData
       );
@@ -26,8 +27,25 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         "@Kenzie-Movie:user-token",
         JSON.stringify(response.data.accessToken)
       );
-        navigate("/")
-        toast.success("Logged successfully!");
+      navigate("/");
+      toast.success("Logged successfully!");
+      return response.data;
+    },
+    onError: (error: IErrorObject) => {
+      toast.error(error.response.data);
+    },
+  });
+
+  const postUserRegister = useMutation({
+    mutationFn: async (formData: IRegisterFormData) => {
+      const response = await kenzieMovieApi.post<IResponseSuccess>(
+        "/users",
+        formData
+      );
+      toast.success("Registered successfully!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2 * 1000)
       return response.data;
     },
     onError: (error: IErrorObject) => {
@@ -36,7 +54,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   });
 
   return (
-    <UserContext.Provider value={{ postUserLogin }}>
+    <UserContext.Provider value={{ postUserLogin, postUserRegister }}>
       {children}
     </UserContext.Provider>
   );
