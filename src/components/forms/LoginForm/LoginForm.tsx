@@ -10,17 +10,18 @@ import { UserContext } from "../../../providers/UserContext/UserContext";
 export const LoginForm = () => {
   const { postUserLogin } = useContext(UserContext);
 
-
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<TLoginFormValues>({
     resolver: zodResolver(LoginFormSchema),
   });
 
   const submit: SubmitHandler<TLoginFormValues> = async (formData) => {
     postUserLogin.mutate(formData);
+    reset();
   };
 
   return (
