@@ -14,12 +14,14 @@ export const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<TLoginFormValues>({
     resolver: zodResolver(LoginFormSchema),
   });
 
   const submit: SubmitHandler<TLoginFormValues> = async (formData) => {
     postUserLogin.mutate(formData);
+    reset();
   };
 
   return (

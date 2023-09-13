@@ -1,0 +1,23 @@
+.registerForm{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  & > div{
+    display: flex;
+    gap: 16px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    & > div {
+      width: 100%;
+    }
+  }
+
+  & > button {
+    width: fit-content;
+    align-self: flex-end;
+  }
+}
