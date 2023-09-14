@@ -14,14 +14,12 @@ export const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<TLoginFormValues>({
     resolver: zodResolver(LoginFormSchema),
   });
 
   const submit: SubmitHandler<TLoginFormValues> = async (formData) => {
     postUserLogin.mutate(formData);
-    reset();
   };
 
   return (
@@ -39,8 +37,8 @@ export const LoginForm = () => {
         placeholder="Password"
         autoComplete="off"
       />
-      <button type="submit" className="btn-md">
-        Entrar
+      <button disabled={postUserLogin.isLoading} type="submit" className="btn-md">
+        Login
       </button>
     </form>
   );

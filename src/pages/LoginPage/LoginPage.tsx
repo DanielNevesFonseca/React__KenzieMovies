@@ -12,8 +12,8 @@ export const LoginPage = () => {
           <h1 className="title1">Login</h1>
           <LoginForm />
           <div className={`${styles.registerBox}`}>
-            <span className="text">ou</span>
-            <Link to={"/register"}>Cadastre-se</Link>
+            <span className="text">or</span>
+            <Link to={"/register"}>Sign-up</Link>
           </div>
         </section>
       </main>
