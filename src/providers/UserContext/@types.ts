@@ -13,6 +13,14 @@ export interface IUserContext {
     IRegisterFormData,
     unknown
   >;
+  userData: {
+    confirm_password?: string,
+    email: string,
+    id: number,
+    name: string,
+    password: string,
+  };
+  logout: () => void;
 }
 export interface IUserProviderProps {
   children: React.ReactNode;
@@ -28,7 +36,8 @@ export interface IRegisterFormData {
 }
 
 export interface IResponseSuccess {
-  accessToken(arg0: string, accessToken: any): unknown;
+  user: any;
+  accessToken(accessToken: any): string;
   data: ILoginData;
   status: number;
   statusText: string;
@@ -39,10 +48,10 @@ export interface IResponseSuccess {
 
 export interface ILoginData {
   accessToken: string;
-  user: User;
+  user: ILoginUser;
 }
 
-export interface User {
+export interface ILoginUser {
   email: string;
   name: string;
   id: number;

@@ -14,13 +14,15 @@ export const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<TRegisterFormValues>({
     resolver: zodResolver(RegisterFormSchema),
   });
 
   const submit: SubmitHandler<TRegisterFormValues> = (formData) => {
-    postUserRegister.mutate(formData);
+    const newFormData = { ...formData };
+    delete newFormData.confirm_password;
+    postUserRegister.mutate(newFormData);
     reset();
   };
 
@@ -56,7 +58,11 @@ export const RegisterForm = () => {
           {...register("confirm_password")}
         />
       </div>
-      <button className="btn-md" type="submit">
+      <button
+        disabled={postUserRegister.isLoading}
+        className="btn-md"
+        type="submit"
+      >
         Register
       </button>
     </form>

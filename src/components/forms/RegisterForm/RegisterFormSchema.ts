@@ -22,7 +22,7 @@ export const RegisterFormSchema = z.object({
       new RegExp(/^(?=.*[0-9]).+$/),
       "Your password must have at least a number!"
     ),
-    confirm_password: z.string().nonempty("Confirm password field required"),
+    confirm_password: z.string().nonempty("Confirm password field required").optional(),
 }).refine(({password, confirm_password}) => confirm_password === password, {
   message: "The password and confirm password are not equal!",
   path: ["confirm_password"]
