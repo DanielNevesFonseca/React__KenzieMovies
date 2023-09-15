@@ -9,6 +9,9 @@ export interface IMoviesContext {
   readMoviesById: UseMutationResult<any, unknown, number, unknown>;
   movieData: IMovie | null;
   averageReview: (movieObj: IMovie | null) => string;
+  isCreateModalOpen: boolean;
+  setIsCreateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  createReview: UseMutationResult<any, unknown, INewReview, unknown>
 }
 
 export interface IReview {
@@ -17,6 +20,13 @@ export interface IReview {
   userId: number;
   score: number;
   description: string;
+}
+
+export interface INewReview{
+  userId: number ;
+  movieId: number | undefined;
+  score: number;
+  description: string
 }
 
 export interface IMovie {

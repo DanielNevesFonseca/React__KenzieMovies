@@ -6,9 +6,12 @@ import { FiStar } from "react-icons/fi";
 import { UserContext } from "../../providers/UserContext/UserContext";
 import { ReviewsList } from "../../components/ReviewsList/ReviewsList";
 import EmptyAnimation from "../../assets/icons/empty-animation.gif";
-import {FiEdit2, FiTrash2} from "react-icons/fi"
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import { CreateReviewModal } from "../../components/modals/CreateReviewModal/CreateReviewModal";
+
 export const MoviePage = () => {
-  const { movieData, averageReview } = useContext(MoviesContext);
+  const { movieData, averageReview, isCreateModalOpen, setIsCreateModalOpen } =
+    useContext(MoviesContext);
   const { userData } = useContext(UserContext);
 
   const hasUserRating = () => {
@@ -66,7 +69,12 @@ export const MoviePage = () => {
           <div className={`${styles.ratingUserBox}`}>
             <h1 className="title1">Reviews</h1>
             {!hasUserRating() ? (
-              <button className={`${styles.ratingButton} btn-md`}>
+              <button
+                onClick={() => {
+                  setIsCreateModalOpen(true);
+                }}
+                className={`${styles.ratingButton} btn-md`}
+              >
                 <FiStar />
                 Rate
               </button>
@@ -79,14 +87,14 @@ export const MoviePage = () => {
                 <p className="text">"{myReview()?.description}"</p>
                 <div>
                   <div className={`${styles.ratingBox}`}>
-                    <FiStar size={21}/>
+                    <FiStar size={21} />
                     <p className="text">{myReview()?.score}/10</p>
                   </div>
                   <button>
-                    <FiEdit2 size={24}/>
+                    <FiEdit2 size={24} />
                   </button>
                   <button>
-                    <FiTrash2 size={24}/>
+                    <FiTrash2 size={24} />
                   </button>
                 </div>
               </div>
@@ -107,6 +115,7 @@ export const MoviePage = () => {
           </div>
         </section>
       </main>
+      {isCreateModalOpen ? <CreateReviewModal /> : null}
     </TemplatePage>
   );
 };
