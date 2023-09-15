@@ -1,9 +1,14 @@
+import { UseMutationResult } from "@tanstack/react-query";
+
 export interface IMoviesProviderProps {
   children: React.ReactNode;
 }
 
 export interface IMoviesContext {
   moviesList: IMovie[] | undefined;
+  readMoviesById: UseMutationResult<any, unknown, number, unknown>;
+  movieData: IMovie | null;
+  averageReview: (movieObj: IMovie | null) => string;
 }
 
 export interface IReview {

@@ -30,7 +30,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       return response.data;
     },
     onSuccess(data) {
-      queryClient.invalidateQueries(["userData"]);
+      queryClient.invalidateQueries(["userData"], { exact: true });
       localStorage.setItem(
         "@Kenzie-Movie:user-token",
         JSON.stringify(data.accessToken)
@@ -72,7 +72,20 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       return data;
     },
     onError: () => {
-      return {};
+      localStorage.removeItem("@Kenzie-Movie:user-token");
+      localStorage.removeItem("@Kenzie-Movie:userId");
+      return undefined;
+    },
+  });
+
+  const { data: allUsersData } = useQuery({
+    queryKey: ["allUsers"],
+    queryFn: async () => {
+      const { data } = await kenzieMovieApi.get(`/users`);
+      return data;
+    },
+    onError: () => {
+      return undefined;
     },
   });
 
@@ -88,7 +101,13 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
   return (
     <UserContext.Provider
-      value={{ postUserLogin, postUserRegister, userData, logout }}
+      value={{
+        postUserLogin,
+        postUserRegister,
+        userData,
+        logout,
+        allUsersData,
+      }}
     >
       {children}
     </UserContext.Provider>
