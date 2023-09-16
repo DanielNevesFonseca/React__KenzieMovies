@@ -8,10 +8,17 @@ import { ReviewsList } from "../../components/ReviewsList/ReviewsList";
 import EmptyAnimation from "../../assets/icons/empty-animation.gif";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { CreateReviewModal } from "../../components/modals/CreateReviewModal/CreateReviewModal";
+import { DeleteReviewModal } from "../../components/modals/DeleteReviewModal/DeleteReviewModal";
 
 export const MoviePage = () => {
-  const { movieData, averageReview, isCreateModalOpen, setIsCreateModalOpen } =
-    useContext(MoviesContext);
+  const {
+    movieData,
+    averageReview,
+    isCreateModalOpen,
+    setIsCreateModalOpen,
+    isDeleteModalOpen,
+    setIsDeleteModalOpen,
+  } = useContext(MoviesContext);
   const { userData } = useContext(UserContext);
 
   const hasUserRating = () => {
@@ -90,10 +97,14 @@ export const MoviePage = () => {
                     <FiStar size={21} />
                     <p className="text">{myReview()?.score}/10</p>
                   </div>
-                  <button>
+                  <button onClick={() => {}}>
                     <FiEdit2 size={24} />
                   </button>
-                  <button>
+                  <button
+                    onClick={() => {
+                      setIsDeleteModalOpen(true);
+                    }}
+                  >
                     <FiTrash2 size={24} />
                   </button>
                 </div>
@@ -116,6 +127,7 @@ export const MoviePage = () => {
         </section>
       </main>
       {isCreateModalOpen ? <CreateReviewModal /> : null}
+      {isDeleteModalOpen ? <DeleteReviewModal /> : null}
     </TemplatePage>
   );
 };

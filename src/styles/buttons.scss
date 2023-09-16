@@ -37,3 +37,20 @@ a:active{
 a:visited{
   color: var(--color-primary-hover);
 }
+
+.delete {
+  background-color: rgb(228, 66, 66);
+
+  &:hover{
+    background-color: rgb(242, 102, 102);
+    color: var(--color-white);
+  }
+}
+
+.cancel {
+  background-color: var(--color-grey-1);
+  &:hover{
+    background-color: var(--color-white);
+    color: var(--color-black);
+  }
+}

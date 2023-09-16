@@ -11,7 +11,10 @@ export interface IMoviesContext {
   averageReview: (movieObj: IMovie | null) => string;
   isCreateModalOpen: boolean;
   setIsCreateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  createReview: UseMutationResult<any, unknown, INewReview, unknown>
+  createReview: UseMutationResult<any, unknown, INewReview, unknown>;
+  isDeleteModalOpen: boolean;
+  setIsDeleteModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteReview: UseMutationResult<any, unknown, number | undefined, unknown>;
 }
 
 export interface IReview {
@@ -22,11 +25,11 @@ export interface IReview {
   description: string;
 }
 
-export interface INewReview{
-  userId: number ;
+export interface INewReview {
+  userId: number;
   movieId: number | undefined;
   score: number;
-  description: string
+  description: string;
 }
 
 export interface IMovie {

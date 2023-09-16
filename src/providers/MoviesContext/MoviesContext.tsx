@@ -22,6 +22,7 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
   );
 
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -74,6 +75,27 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
     },
   });
 
+  const deleteReview = useMutation({
+    mutationFn: async (movieId: number | undefined) => {
+      const token: string | null = localStorage.getItem(
+        "@Kenzie-Movie:user-token"
+      );
+      if (token) {
+        const response = await kenzieMovieApi.delete(`/reviews/${movieId}`, {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+          },
+        });
+        console.log(response.data);
+        return response.data;
+      }
+    },
+    onSuccess: (data) => {
+      toast.success("Your comment has been removed!");
+      readMoviesById.mutate(data.movieId);
+    },
+  });
+
   const averageReview = (movieObj: IMovie | null) => {
     const reviewsList = movieObj?.reviews;
 
@@ -94,10 +116,14 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
         moviesList,
         readMoviesById,
         movieData,
+        createReview,
+        deleteReview,
         averageReview,
         isCreateModalOpen,
         setIsCreateModalOpen,
-        createReview,
+        setIsDeleteModalOpen,
+        isDeleteModalOpen,
+
       }}
     >
       {children}
