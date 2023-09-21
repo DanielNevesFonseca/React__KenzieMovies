@@ -7,9 +7,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateModalSchema, ICreateModalValues } from "./CreateReviewSchema";
 import { UserContext } from "../../../providers/UserContext/UserContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const CreateReviewModal = () => {
-  const { setIsCreateModalOpen, movieData, createReview } =
+  const { setIsCreateModalOpen, movieData, createReview,  } =
     useContext(MoviesContext);
   const { userData } = useContext(UserContext);
   
@@ -30,7 +31,6 @@ export const CreateReviewModal = () => {
       movieId: movieData?.id,
       userId: userData.id,
     };
-    console.log(newFormData);
     createReview.mutate(newFormData);
     setIsCreateModalOpen(false);
     reset();

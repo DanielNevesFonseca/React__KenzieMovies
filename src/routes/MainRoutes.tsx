@@ -16,7 +16,7 @@ export const MainRoutes = () => {
       <Route element={<PrivateRoutes />}></Route>
       {/* Páginas */}
       <Route path="/" element={<HomePage />} />
-      <Route path="/movie" element={<MoviePage />} /> 
+      <Route path="/movie/:id" element={<MoviePage />} /> 
     </Routes>
   );
 };

@@ -37,8 +37,12 @@ export const MoviePage = () => {
 
   const myReview = () => {
     if (hasUserRating()) {
-      const myReview = movieData?.reviews.find(
-        (review) => review.userId === userData.id
+      const myReview = movieData?.reviews.find((review) => {
+        return review.userId === userData.id;
+      });
+      localStorage.setItem(
+        "@Kenzie-Movie:userReviewId",
+        JSON.stringify(myReview)
       );
       return myReview;
     }
@@ -102,7 +106,7 @@ export const MoviePage = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setIsDeleteModalOpen(true);
+                      setIsDeleteModalOpen(myReview()?.id);
                     }}
                   >
                     <FiTrash2 size={24} />

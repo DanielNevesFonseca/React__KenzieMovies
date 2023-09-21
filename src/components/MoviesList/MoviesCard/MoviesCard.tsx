@@ -9,12 +9,15 @@ interface IMoviesCardProps {
 }
 
 export const MoviesCard = ({ movie }: IMoviesCardProps) => {
-  const { readMoviesById, averageReview } = useContext(MoviesContext);
+  const { readMoviesById, averageReview } =
+    useContext(MoviesContext);
 
   return (
     <li className={styles.movieItem}>
       <img
-        onClick={() => readMoviesById.mutate(movie.id)}
+        onClick={() => {
+          readMoviesById.mutate(movie.id);
+        }}
         src={movie.image}
         alt={`${movie.name} image`}
       />

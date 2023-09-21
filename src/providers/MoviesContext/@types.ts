@@ -6,15 +6,32 @@ export interface IMoviesProviderProps {
 
 export interface IMoviesContext {
   moviesList: IMovie[] | undefined;
-  readMoviesById: UseMutationResult<any, unknown, number, unknown>;
+  readMoviesById: UseMutationResult<
+    any,
+    unknown,
+    number | null | undefined,
+    unknown
+  >;
   movieData: IMovie | null;
   averageReview: (movieObj: IMovie | null) => string;
   isCreateModalOpen: boolean;
   setIsCreateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   createReview: UseMutationResult<any, unknown, INewReview, unknown>;
-  isDeleteModalOpen: boolean;
-  setIsDeleteModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  deleteReview: UseMutationResult<any, unknown, number | undefined, unknown>;
+  isDeleteModalOpen: number | null | undefined;
+  setIsDeleteModalOpen: React.Dispatch<
+    React.SetStateAction<number | null | undefined>
+  >;
+  deleteReview: UseMutationResult<any, unknown, void, unknown>;
+  setMovieData: React.Dispatch<React.SetStateAction<IMovie | null>>;
+  myReviewData: IReview | null;
+  setMyReviewData: React.Dispatch<React.SetStateAction<IReview | null>>;
+}
+export interface IUserReview {
+  id: number;
+  movieId: number;
+  userId: number;
+  score: number;
+  description: string;
 }
 
 export interface IReview {

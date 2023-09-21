@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { MoviesContext } from "../../../providers/MoviesContext/MoviesContext";
 
 export const DeleteReviewModal = () => {
-  const { setIsDeleteModalOpen, deleteReview, movieData } =
+  const { setIsDeleteModalOpen, deleteReview, } =
     useContext(MoviesContext);
 
   return (
@@ -15,7 +15,7 @@ export const DeleteReviewModal = () => {
         </h3>
         <button
           onClick={() => {
-            setIsDeleteModalOpen(false);
+            setIsDeleteModalOpen(null);
           }}
         >
           <AiOutlineClose size={21} />
@@ -23,7 +23,8 @@ export const DeleteReviewModal = () => {
         <div>
           <button
             onClick={() => {
-              deleteReview.mutate(movieData?.id);
+              deleteReview.mutate();
+              setIsDeleteModalOpen(null);
             }}
             className={`btn-md delete`}
           >
@@ -32,7 +33,7 @@ export const DeleteReviewModal = () => {
           <button
             className={`btn-md cancel`}
             onClick={() => {
-              setIsDeleteModalOpen(false);
+              setIsDeleteModalOpen(null);
             }}
           >
             Cancel

@@ -6,6 +6,7 @@ import {
   IMoviesContext,
   IMoviesProviderProps,
   INewReview,
+  IReview,
 } from "./@types";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
@@ -17,12 +18,19 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
     "@Kenzie-Movie:currentPost"
   );
 
+  const myReviewObject = localStorage.getItem("@Kenzie-Movie:userReviewId");
+
   const [movieData, setMovieData] = useState<IMovie | null>(
     movieDataObject ? JSON.parse(movieDataObject) : null
   );
 
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<
+    number | null | undefined
+  >(null);
+  const [myReviewData, setMyReviewData] = useState<IReview | null>(
+    myReviewObject ? JSON.parse(myReviewObject) : null
+  );
 
   const navigate = useNavigate();
 
@@ -38,16 +46,16 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
 
   const readMoviesById = useMutation({
     mutationKey: ["movieDataObject"],
-    mutationFn: async (movieId: number) => {
+    mutationFn: async (movieId: number | null | undefined) => {
       const response = await kenzieMovieApi.get(
         `/movies/${movieId}?_embed=reviews`
       );
       return response.data;
     },
-    onSuccess: (data) => {
+    onSuccess: (data, movieId) => {
       setMovieData(data);
       localStorage.setItem("@Kenzie-Movie:currentPost", JSON.stringify(data));
-      navigate(`/movie`);
+      navigate(`/movie/${movieId}`);
     },
     onError: (error) => {
       console.log(error);
@@ -65,34 +73,38 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
             Authorization: `Bearer ${JSON.parse(token)}`,
           },
         });
-        console.log(response);
         return response.data;
       }
     },
     onSuccess: (data) => {
       toast.success("Review created successfully!");
       readMoviesById.mutate(data.movieId);
+
+      console.log(movieData);
     },
   });
 
   const deleteReview = useMutation({
-    mutationFn: async (movieId: number | undefined) => {
+    mutationFn: async () => {
       const token: string | null = localStorage.getItem(
         "@Kenzie-Movie:user-token"
       );
+      
       if (token) {
-        const response = await kenzieMovieApi.delete(`/reviews/${movieId}`, {
-          headers: {
-            Authorization: `Bearer ${JSON.parse(token)}`,
-          },
-        });
-        console.log(response.data);
-        return response.data;
+        const response = await kenzieMovieApi.delete(
+          `/reviews/${myReviewData?.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${JSON.parse(token)}`,
+            },
+          }
+        );
+        return response;
       }
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success("Your comment has been removed!");
-      readMoviesById.mutate(data.movieId);
+      readMoviesById.mutate(movieData?.id);
     },
   });
 
@@ -123,7 +135,9 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
         setIsCreateModalOpen,
         setIsDeleteModalOpen,
         isDeleteModalOpen,
-
+        setMovieData,
+        myReviewData,
+        setMyReviewData
       }}
     >
       {children}
