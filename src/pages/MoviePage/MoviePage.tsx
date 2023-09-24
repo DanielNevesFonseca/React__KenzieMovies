@@ -3,12 +3,12 @@ import { TemplatePage } from "../../components/TemplatePage/TemplatePage";
 import { MoviesContext } from "../../providers/MoviesContext/MoviesContext";
 import styles from "./styles.module.scss";
 import { FiStar } from "react-icons/fi";
-import { UserContext } from "../../providers/UserContext/UserContext";
 import { ReviewsList } from "../../components/ReviewsList/ReviewsList";
 import EmptyAnimation from "../../assets/icons/empty-animation.gif";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { CreateReviewModal } from "../../components/modals/CreateReviewModal/CreateReviewModal";
 import { DeleteReviewModal } from "../../components/modals/DeleteReviewModal/DeleteReviewModal";
+import { EditReviewModal } from "../../components/modals/EditReviewModal/EditReviewModal";
 
 export const MoviePage = () => {
   const {
@@ -18,35 +18,14 @@ export const MoviePage = () => {
     setIsCreateModalOpen,
     isDeleteModalOpen,
     setIsDeleteModalOpen,
+    isEditModalOpen,
+    setIsEditModalOpen,
+    myReview,
+    hasUserRating,
+    findUserReview,
   } = useContext(MoviesContext);
-  const { userData } = useContext(UserContext);
 
-  const hasUserRating = () => {
-    const isValid = movieData?.reviews.some(
-      (review) => review.userId == userData?.id
-    );
-    return isValid;
-  };
-
-  const findUserReview = (reviewUserId: number, list: any) => {
-    const user = list?.find(
-      (userObj: { id: number }) => userObj.id === reviewUserId
-    );
-    return user;
-  };
-
-  const myReview = () => {
-    if (hasUserRating()) {
-      const myReview = movieData?.reviews.find((review) => {
-        return review.userId === userData.id;
-      });
-      localStorage.setItem(
-        "@Kenzie-Movie:userReviewId",
-        JSON.stringify(myReview)
-      );
-      return myReview;
-    }
-  };
+  const myReviewObj = {...myReview()};
 
   return (
     <TemplatePage>
@@ -101,7 +80,11 @@ export const MoviePage = () => {
                     <FiStar size={21} />
                     <p className="text">{myReview()?.score}/10</p>
                   </div>
-                  <button onClick={() => {}}>
+                  <button
+                    onClick={() => {
+                      myReviewObj ? setIsEditModalOpen(myReview()) : null;
+                    }}
+                  >
                     <FiEdit2 size={24} />
                   </button>
                   <button
@@ -132,6 +115,7 @@ export const MoviePage = () => {
       </main>
       {isCreateModalOpen ? <CreateReviewModal /> : null}
       {isDeleteModalOpen ? <DeleteReviewModal /> : null}
+      {isEditModalOpen ? <EditReviewModal /> : null}
     </TemplatePage>
   );
 };

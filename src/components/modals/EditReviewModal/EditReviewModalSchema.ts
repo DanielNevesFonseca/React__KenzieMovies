@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const CreateModalSchema = z.object({
+export const EditReviewModalSchema = z.object({
   score: z
     .number()
     .min(0, "Must be equal or greater than 0!")
@@ -11,4 +11,4 @@ export const CreateModalSchema = z.object({
     .min(20, "Your comment must have at least 20 characters!"),
 });
 
-export type ICreateModalValues = z.infer<typeof CreateModalSchema>;
+export type IEditReviewModalValues = z.infer<typeof EditReviewModalSchema>;

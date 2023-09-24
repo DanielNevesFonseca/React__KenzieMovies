@@ -1,49 +1,46 @@
-import { Input } from "../../forms/Input/Input";
 import { AiOutlineClose } from "react-icons/ai";
-import styles from "./styles.module.scss";
-import { useContext } from "react";
-import { MoviesContext } from "../../../providers/MoviesContext/MoviesContext";
+import { Input } from "../../forms/Input/Input";
 import { SubmitHandler, useForm } from "react-hook-form";
+import styles from "./styles.module.scss";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateModalSchema, ICreateModalValues } from "./CreateReviewSchema";
-import { UserContext } from "../../../providers/UserContext/UserContext";
+import {
+  EditReviewModalSchema,
+  IEditReviewModalValues,
+} from "./EditReviewModalSchema";
+import { MoviesContext } from "../../../providers/MoviesContext/MoviesContext";
+import { useContext } from "react";
+import { INewReview } from "../../../providers/MoviesContext/@types";
 
-export const CreateReviewModal = () => {
-  const { setIsCreateModalOpen, movieData, createReview,  } =
+export const EditReviewModal = () => {
+  const { isEditModalOpen, setIsEditModalOpen, editReview, movieData } =
     useContext(MoviesContext);
-  const { userData } = useContext(UserContext);
-  
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ICreateModalValues>({
-    resolver: zodResolver(CreateModalSchema),
+  } = useForm<IEditReviewModalValues>({
+    resolver: zodResolver(EditReviewModalSchema),
   });
 
-
-  const submit: SubmitHandler<ICreateModalValues> = (formData) => {
-    const newFormData = {
+  const submit: SubmitHandler<IEditReviewModalValues> = (formData) => {
+    const userId = localStorage.getItem("@Kenzie-Movie:userId");
+    const newFormData: INewReview = {
       ...formData,
+      userId: Number(userId),
       movieId: movieData?.id,
-      userId: userData.id,
     };
-    createReview.mutate(newFormData);
-    setIsCreateModalOpen(false);
+    editReview.mutate(newFormData);
+    setIsEditModalOpen(null);
     reset();
   };
 
   return (
     <div className={`${styles.modalController}`} role="dialog">
       <div className={`${styles.modalContainer}`}>
-        <h1 className="title1">Review</h1>
-        <button type="button"
-          onClick={() => {
-            setIsCreateModalOpen(false);
-          }}
-        >
+        <h1 className="title1">Edit Review</h1>
+        <button onClick={() => setIsEditModalOpen(null)} type="button">
           <AiOutlineClose size={21} />
         </button>
         <form onSubmit={handleSubmit(submit)}>
@@ -56,19 +53,23 @@ export const CreateReviewModal = () => {
               max: 10,
               min: 0,
               valueAsNumber: true,
+              value: isEditModalOpen?.score
             })}
+            
             error={errors?.score}
           />
           <div className={`${styles.textareaBox}`}>
             <textarea
               autoComplete="off"
-              {...register("description")}
+              {...register("description", {
+                value: isEditModalOpen?.description
+              })}
               className={`input`}
               placeholder="Leave a comment"
             ></textarea>
             <span>{errors?.description?.message}</span>
           </div>
-          <button className={`${styles} btn-md`}>Make Review</button>
+          <button className={`${styles} btn-md`}>Edit Review</button>
         </form>
       </div>
     </div>

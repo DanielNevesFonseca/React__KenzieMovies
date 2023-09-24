@@ -14,6 +14,7 @@
   max-width: calc(100dvw - 5px);
   min-height: calc(640px - 120px);
   display: flex;
+
   & > img {
     width: calc(100dvw + 100px);
     height: 640px;
@@ -21,6 +22,15 @@
     position: absolute;
     top: -120px;
     left: -60px;
+
+  }
+
+  @media (max-width: 768px){
+    min-height: calc(430px - 120px);
+
+    &> img{
+      height: 430px;
+    }
   }
 }
 
@@ -91,6 +101,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  justify-self: flex-start;
 
   & > svg {
     color: var(--color-primary);
@@ -118,6 +129,7 @@
 .yourRating {
   display: flex;
   justify-content: space-between;
+  gap: 16px;
   margin-top: 24px;
   margin-bottom: 60px;
   padding: 32px 16px;
@@ -127,9 +139,16 @@
   & > div {
     display: flex;
     gap: 16px;
+    width: 100%;
+    justify-content: flex-end;
   
     & > button{
       color: var(--color-primary);
     }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: space-between;
   }
 }

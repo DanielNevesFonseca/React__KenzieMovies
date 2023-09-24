@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { kenzieMovieApi } from "../../services/kenzieMovieApi";
 import {
   IMovie,
@@ -10,25 +10,29 @@ import {
 } from "./@types";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import { UserContext } from "../UserContext/UserContext";
 
 export const MoviesContext = createContext({} as IMoviesContext);
 
 export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
+  const { userData } = useContext(UserContext);
   const movieDataObject: string | null = localStorage.getItem(
     "@Kenzie-Movie:currentPost"
   );
 
-  const myReviewObject = localStorage.getItem("@Kenzie-Movie:userReviewId");
-
   const [movieData, setMovieData] = useState<IMovie | null>(
     movieDataObject ? JSON.parse(movieDataObject) : null
   );
+  const myReviewObject = localStorage.getItem("@Kenzie-Movie:userReviewData");
 
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<
     number | null | undefined
   >(null);
-  const [myReviewData, setMyReviewData] = useState<IReview | null>(
+  const [isEditModalOpen, setIsEditModalOpen] = useState<INewReview | null | undefined>(
+    null
+  );
+  const [myReviewData, setMyReviewData] = useState<IReview | null | undefined>(
     myReviewObject ? JSON.parse(myReviewObject) : null
   );
 
@@ -54,8 +58,10 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
     },
     onSuccess: (data, movieId) => {
       setMovieData(data);
+      setMyReviewData(myReview());
       localStorage.setItem("@Kenzie-Movie:currentPost", JSON.stringify(data));
       navigate(`/movie/${movieId}`);
+      myReview();
     },
     onError: (error) => {
       console.log(error);
@@ -79,8 +85,31 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
     onSuccess: (data) => {
       toast.success("Review created successfully!");
       readMoviesById.mutate(data.movieId);
-
       console.log(movieData);
+    },
+  });
+
+  const editReview = useMutation({
+    mutationFn: async (formData: INewReview) => {
+      const token: string | null = localStorage.getItem(
+        "@Kenzie-Movie:user-token"
+      );
+      if (token) {
+        const response = await kenzieMovieApi.put(
+          `/reviews/${myReview()?.id}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${JSON.parse(token)}`,
+            },
+          }
+        );
+        return response.data;
+      }
+    },
+    onSuccess: (data) => {
+      toast.success("Review edited successfully!");
+      readMoviesById.mutate(data.movieId);
     },
   });
 
@@ -89,10 +118,10 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
       const token: string | null = localStorage.getItem(
         "@Kenzie-Movie:user-token"
       );
-      
+
       if (token) {
         const response = await kenzieMovieApi.delete(
-          `/reviews/${myReviewData?.id}`,
+          `/reviews/${myReview()?.id}`,
           {
             headers: {
               Authorization: `Bearer ${JSON.parse(token)}`,
@@ -122,6 +151,36 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
     }
   };
 
+  const hasUserRating = () => {
+    const isValid = movieData?.reviews.some(
+      (review) => review.userId == userData?.id
+    );
+    return isValid;
+  };
+
+  const findUserReview = (reviewUserId: number, list: any) => {
+    const user = list?.find(
+      (userObj: { id: number }) => userObj.id === reviewUserId
+    );
+    return user;
+  };
+
+  const myReview = () => {
+    if (hasUserRating()) {
+      const myReview = movieData?.reviews.find((review) => {
+        return review.userId === userData.id;
+      });
+      localStorage.setItem(
+        "@Kenzie-Movie:userReviewData",
+        JSON.stringify(myReview)
+      );
+      return myReview;
+    } else {
+      localStorage.removeItem("@Kenzie-Movie:userReviewData");
+      return null;
+    }
+  };
+
   return (
     <MoviesContext.Provider
       value={{
@@ -137,7 +196,13 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
         isDeleteModalOpen,
         setMovieData,
         myReviewData,
-        setMyReviewData
+        setMyReviewData,
+        isEditModalOpen,
+        setIsEditModalOpen,
+        editReview,
+        hasUserRating,
+        findUserReview,
+        myReview,
       }}
     >
       {children}
