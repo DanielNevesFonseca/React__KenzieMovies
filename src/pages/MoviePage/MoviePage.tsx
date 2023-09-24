@@ -9,6 +9,7 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { CreateReviewModal } from "../../components/modals/CreateReviewModal/CreateReviewModal";
 import { DeleteReviewModal } from "../../components/modals/DeleteReviewModal/DeleteReviewModal";
 import { EditReviewModal } from "../../components/modals/EditReviewModal/EditReviewModal";
+import { toast } from "react-toastify";
 
 export const MoviePage = () => {
   const {
@@ -25,7 +26,9 @@ export const MoviePage = () => {
     findUserReview,
   } = useContext(MoviesContext);
 
-  const myReviewObj = {...myReview()};
+  const myReviewObj = { ...myReview() };
+
+  const token = localStorage.getItem("@Kenzie-Movie:user-token");
 
   return (
     <TemplatePage>
@@ -56,12 +59,17 @@ export const MoviePage = () => {
         </section>
 
         <section>
+          {/* Reviews Section in case there is no review */}
           <div className={`${styles.ratingUserBox}`}>
             <h1 className="title1">Reviews</h1>
             {!hasUserRating() ? (
               <button
                 onClick={() => {
-                  setIsCreateModalOpen(true);
+                  {
+                    !token
+                      ? toast.warn("Only logged users can make reviews!")
+                      : setIsCreateModalOpen(true);
+                  }
                 }}
                 className={`${styles.ratingButton} btn-md`}
               >
@@ -70,6 +78,7 @@ export const MoviePage = () => {
               </button>
             ) : null}
           </div>
+
           {hasUserRating() ? (
             <>
               <h3 className="title3">Your Review</h3>
