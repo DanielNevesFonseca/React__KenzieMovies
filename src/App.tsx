@@ -6,11 +6,11 @@ import "./styles/index.scss";
 const App = () => {
   return (
     <>
-      <MoviesProvider>
-        <UserProvider>
+      <UserProvider>
+        <MoviesProvider>
           <MainRoutes />
-        </UserProvider>
-      </MoviesProvider>
+        </MoviesProvider>
+      </UserProvider>
     </>
   );
 };

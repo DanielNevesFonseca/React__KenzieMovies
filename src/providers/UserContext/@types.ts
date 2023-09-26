@@ -21,7 +21,16 @@ export interface IUserContext {
     password: string,
   };
   logout: () => void;
+  allUsersData: IUser[];
 }
+
+export interface IUser{
+  email: string,
+  name: string,
+  age: number,
+  id: number,
+}
+
 export interface IUserProviderProps {
   children: React.ReactNode;
 }

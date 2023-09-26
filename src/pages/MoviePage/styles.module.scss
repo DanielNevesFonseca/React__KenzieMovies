@@ -1,0 +1,154 @@
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  @extend .flex-column;
+  gap: 60px;
+}
+
+.imageSection {
+  position: relative;
+  width: 100%;
+  max-width: calc(100dvw - 5px);
+  min-height: calc(640px - 120px);
+  display: flex;
+
+  & > img {
+    width: calc(100dvw + 100px);
+    height: 640px;
+    object-fit: cover;
+    position: absolute;
+    top: -120px;
+    left: -60px;
+
+  }
+
+  @media (max-width: 768px){
+    min-height: calc(430px - 120px);
+
+    &> img{
+      height: 430px;
+    }
+  }
+}
+
+.infoContainer {
+  display: flex;
+  align-self: center;
+  max-width: 100%;
+  gap: 24px;
+  justify-content: space-between;
+  z-index: 1000 !important;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 16px;
+  max-width: 1024px;
+
+  @media (min-width: 1024px) {
+    left: calc(((100dvw - 1024px) / 2) - 16px);
+  }
+}
+
+.synopsisText {
+  max-width: 600px;
+
+  & > p {
+    text-align: left;
+  }
+}
+
+.textBox {
+  @extend .flex-column;
+  gap: 28px;
+  justify-content: space-between;
+
+  & > span {
+    width: fit-content;
+  }
+}
+
+.ratingUserBox {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+.rateBox {
+  @extend .flex-column;
+  gap: 28px;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  & > p {
+    color: var(--color-white);
+    font-weight: 600;
+  }
+}
+
+.ratingButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-white);
+  font-weight: 700;
+}
+
+.ratingBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: flex-start;
+
+  & > svg {
+    color: var(--color-primary);
+  }
+}
+
+.textBox,
+.rateBox {
+  @media (min-width: 768px) {
+    gap: 16px;
+  }
+}
+
+.noReviewBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  & > img {
+    object-fit: contain;
+    height: 125px;
+  }
+}
+
+.yourRating {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+  margin-bottom: 60px;
+  padding: 32px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-grey-1);
+
+  & > div {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    justify-content: flex-end;
+  
+    & > button{
+      color: var(--color-primary);
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

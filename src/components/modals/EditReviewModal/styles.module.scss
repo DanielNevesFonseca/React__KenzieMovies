@@ -1,0 +1,59 @@
+.modalController {
+  min-width: 100dvw;
+  min-height: 100dvh;
+  position: fixed;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(15px);
+  padding: 16px;
+}
+
+.modalContainer {
+  background-color: var(--color-grey-2);
+  max-width: 700px;
+  width: 100%;
+  padding: 48px 60px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  & > button {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    color: var(--color-white);
+  }
+
+  & > form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    & > div > textarea {
+      max-width: 100%;
+      resize: none;
+      box-sizing: border-box;
+      padding-top: 16px;
+      height: 200px;
+    }
+
+    & > button{
+      width: fit-content;
+    }
+  }
+}
+
+.textareaBox{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  & > span{
+    color: var(--color-primary);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+  }
+}
