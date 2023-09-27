@@ -3,9 +3,9 @@
   border-radius: 255px;
   background-color: var(--color-primary);
   font-family: var(--font-title);
-  transition: ease-in-out .3s;
-  
-  &:hover{
+  transition: ease-in-out 0.3s;
+
+  &:hover {
     background-color: var(--color-primary-hover);
     color: var(--color-grey-2);
   }
@@ -19,29 +19,30 @@
   padding: 12px 32px;
 }
 
-.link, a{
+.link,
+a {
   text-decoration: none;
   font-family: var(--font-title);
   font-size: 14px;
   color: var(--color-primary);
 
-  &:hover{
+  &:hover {
     text-decoration: underline;
   }
 }
 
-a:active{
+a:active {
   color: var(--color-primary-hover);
 }
 
-a:visited{
+a:visited {
   color: var(--color-primary-hover);
 }
 
 .delete {
   background-color: rgb(228, 66, 66);
 
-  &:hover{
+  &:hover {
     background-color: rgb(242, 102, 102);
     color: var(--color-white);
   }
@@ -49,7 +50,7 @@ a:visited{
 
 .cancel {
   background-color: var(--color-grey-1);
-  &:hover{
+  &:hover {
     background-color: var(--color-white);
     color: var(--color-black);
   }

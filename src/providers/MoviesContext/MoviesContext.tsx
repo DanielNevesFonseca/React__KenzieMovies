@@ -29,9 +29,9 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<
     number | null | undefined
   >(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState<INewReview | null | undefined>(
-    null
-  );
+  const [isEditModalOpen, setIsEditModalOpen] = useState<
+    INewReview | null | undefined
+  >(null);
   const [myReviewData, setMyReviewData] = useState<IReview | null | undefined>(
     myReviewObject ? JSON.parse(myReviewObject) : null
   );
@@ -203,7 +203,7 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
         hasUserRating,
         findUserReview,
         myReview,
-        isMoviesListLoading
+        isMoviesListLoading,
       }}
     >
       {children}

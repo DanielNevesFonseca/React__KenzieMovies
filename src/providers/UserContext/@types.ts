@@ -14,21 +14,21 @@ export interface IUserContext {
     unknown
   >;
   userData: {
-    confirm_password?: string,
-    email: string,
-    id: number,
-    name: string,
-    password: string,
+    confirm_password?: string;
+    email: string;
+    id: number;
+    name: string;
+    password: string;
   };
   logout: () => void;
   allUsersData: IUser[];
 }
 
-export interface IUser{
-  email: string,
-  name: string,
-  age: number,
-  id: number,
+export interface IUser {
+  email: string;
+  name: string;
+  age: number;
+  id: number;
 }
 
 export interface IUserProviderProps {

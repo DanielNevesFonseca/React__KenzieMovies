@@ -5,7 +5,7 @@ export const HomePageSkeleton = () => {
   return (
     <div className={`mainMovie container`}>
       <div className="imageContainer">
-        <Skeleton borderRadius={50} height={"100%"}/>
+        <Skeleton borderRadius={50} height={"100%"} />
       </div>
       <div>
         <div className={`infoContainer`}>

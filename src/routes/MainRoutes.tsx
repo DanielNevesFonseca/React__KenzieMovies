@@ -14,9 +14,8 @@ export const MainRoutes = () => {
         <Route path="/register" element={<RegisterPage />} />
       </Route>
       <Route element={<PrivateRoutes />}></Route>
-      {/* Páginas */}
       <Route path="/" element={<HomePage />} />
-      <Route path="/movie/:id" element={<MoviePage />} /> 
+      <Route path="/movie/:id" element={<MoviePage />} />
     </Routes>
   );
 };

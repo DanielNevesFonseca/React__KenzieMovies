@@ -1,4 +1,4 @@
-.input{
+.input {
   height: 55px;
   background-color: var(--color-grey-1);
   padding: 0 33px;
@@ -9,7 +9,7 @@
   outline: none;
   width: 100%;
 
-  &:focus{
+  &:focus {
     border-color: var(--color-primary);
   }
 }

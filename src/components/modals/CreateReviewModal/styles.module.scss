@@ -40,18 +40,18 @@
       height: 200px;
     }
 
-    & > button{
+    & > button {
       width: fit-content;
     }
   }
 }
 
-.textareaBox{
+.textareaBox {
   display: flex;
   flex-direction: column;
   gap: 6px;
 
-  & > span{
+  & > span {
     color: var(--color-primary);
     font-family: var(--font-body);
     font-size: 0.875rem;

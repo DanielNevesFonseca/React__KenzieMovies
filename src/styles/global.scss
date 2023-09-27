@@ -1,32 +1,32 @@
-:root{
-  --color-primary: #FFBB38;
+:root {
+  --color-primary: #ffbb38;
   --color-primary-hover: #fcc765;
-  --color-grey-1: #3D3D3D;
+  --color-grey-1: #3d3d3d;
   --color-grey-2: #171717;
-  --color-white: #FFF;
+  --color-white: #fff;
   --color-black: #000;
   --font-title: "Poppins", sans-serif;
   --font-body: "Inter", sans-serif;
 }
 
-  body,html{
+body,
+html {
   min-height: 100dvh;
   min-width: 100%;
   background-color: var(--color-grey-2);
   overflow-x: hidden;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 5px;
   height: 5px;
-
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   background-color: var(--color-grey-1);
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background-color: var(--color-primary);
   border-radius: 12px;
 }
