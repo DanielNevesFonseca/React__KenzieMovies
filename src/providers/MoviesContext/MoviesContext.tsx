@@ -38,7 +38,7 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
 
   const navigate = useNavigate();
 
-  const { data: moviesList } = useQuery({
+  const { data: moviesList, isLoading: isMoviesListLoading } = useQuery({
     queryKey: ["movies"],
     queryFn: async () => {
       const { data } = await kenzieMovieApi.get<IMovie[]>(
@@ -203,6 +203,7 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
         hasUserRating,
         findUserReview,
         myReview,
+        isMoviesListLoading
       }}
     >
       {children}

@@ -1,0 +1,32 @@
+.mainMovie {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  margin-bottom: 36px;
+}
+
+.imageContainer {
+  height: 185px;
+  @media (min-width: 768px) {
+    &:first-of-type {
+      height: 536px;
+    }
+  }
+}
+
+.infoContainer {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  & > div:last-child {
+    align-items: flex-end;
+  }
+}

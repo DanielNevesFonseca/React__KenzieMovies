@@ -33,6 +33,7 @@ export interface IMoviesContext {
   hasUserRating: () => boolean | undefined;
   findUserReview: (reviewUserId: number, list: any) => any;
   myReview: () => IReview | undefined | null;
+  isMoviesListLoading: boolean;
 }
 export interface IUserReview {
   id: number;
