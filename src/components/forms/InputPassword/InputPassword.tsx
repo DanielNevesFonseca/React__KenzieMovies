@@ -16,9 +16,14 @@ export const InputPassword = forwardRef(
 
     return (
       <div className={`${styles.inputPasswordBox}`}>
-        <input type={isVisible ? "text" : "password"} {...rest} ref={ref} className="input" />
+        <input
+          type={isVisible ? "text" : "password"}
+          {...rest}
+          ref={ref}
+          className="input"
+        />
         <button type="button" onClick={() => setIsVisible(!isVisible)}>
-          {isVisible ? <GoEyeClosed size={24}/> : <GoEye size={24}/>}
+          {isVisible ? <GoEyeClosed size={24} /> : <GoEye size={24} />}
         </button>
         <span>{error?.message}</span>
       </div>

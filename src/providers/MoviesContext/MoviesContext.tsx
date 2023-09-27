@@ -29,16 +29,16 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<
     number | null | undefined
   >(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState<INewReview | null | undefined>(
-    null
-  );
+  const [isEditModalOpen, setIsEditModalOpen] = useState<
+    INewReview | null | undefined
+  >(null);
   const [myReviewData, setMyReviewData] = useState<IReview | null | undefined>(
     myReviewObject ? JSON.parse(myReviewObject) : null
   );
 
   const navigate = useNavigate();
 
-  const { data: moviesList } = useQuery({
+  const { data: moviesList, isLoading: isMoviesListLoading } = useQuery({
     queryKey: ["movies"],
     queryFn: async () => {
       const { data } = await kenzieMovieApi.get<IMovie[]>(
@@ -203,6 +203,7 @@ export const MoviesProvider = ({ children }: IMoviesProviderProps) => {
         hasUserRating,
         findUserReview,
         myReview,
+        isMoviesListLoading,
       }}
     >
       {children}

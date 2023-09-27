@@ -17,7 +17,7 @@ export const RegisterPage = () => {
             </Link>
           </div>
           <p className="text">Fill the fields below to register</p>
-          <RegisterForm/>
+          <RegisterForm />
         </section>
       </main>
     </TemplatePage>
