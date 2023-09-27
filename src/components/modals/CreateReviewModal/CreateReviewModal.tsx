@@ -9,10 +9,9 @@ import { CreateModalSchema, ICreateModalValues } from "./CreateReviewSchema";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 
 export const CreateReviewModal = () => {
-  const { setIsCreateModalOpen, movieData, createReview,  } =
+  const { setIsCreateModalOpen, movieData, createReview } =
     useContext(MoviesContext);
   const { userData } = useContext(UserContext);
-  
 
   const {
     register,
@@ -22,7 +21,6 @@ export const CreateReviewModal = () => {
   } = useForm<ICreateModalValues>({
     resolver: zodResolver(CreateModalSchema),
   });
-
 
   const submit: SubmitHandler<ICreateModalValues> = (formData) => {
     const newFormData = {
@@ -39,7 +37,8 @@ export const CreateReviewModal = () => {
     <div className={`${styles.modalController}`} role="dialog">
       <div className={`${styles.modalContainer}`}>
         <h1 className="title1">Review</h1>
-        <button type="button"
+        <button
+          type="button"
           onClick={() => {
             setIsCreateModalOpen(false);
           }}

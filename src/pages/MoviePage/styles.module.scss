@@ -22,13 +22,12 @@
     position: absolute;
     top: -120px;
     left: -60px;
-
   }
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     min-height: calc(430px - 120px);
 
-    &> img{
+    & > img {
       height: 430px;
     }
   }
@@ -115,14 +114,35 @@
   }
 }
 
+@keyframes emojiAnimationForward {
+  0% {
+    width: 125px;
+  }
+  50% {
+    width: calc(2048px - 70px);
+  }
+  100% {
+    width: 125px;
+  }
+}
+
 .noReviewBox {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   gap: 24px;
 
   & > img {
+    align-self: flex-start;
     object-fit: contain;
     height: 125px;
+    width: 125px;
+    animation-name: emojiAnimationForward;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transition: all none;
   }
 }
 
@@ -141,8 +161,8 @@
     gap: 16px;
     width: 100%;
     justify-content: flex-end;
-  
-    & > button{
+
+    & > button {
       color: var(--color-primary);
     }
   }

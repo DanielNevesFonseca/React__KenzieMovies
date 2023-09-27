@@ -28,11 +28,14 @@ export interface IMoviesContext {
     React.SetStateAction<IReview | null | undefined>
   >;
   isEditModalOpen: INewReview | null | undefined;
-  setIsEditModalOpen: React.Dispatch<React.SetStateAction<INewReview | null | undefined>>;
+  setIsEditModalOpen: React.Dispatch<
+    React.SetStateAction<INewReview | null | undefined>
+  >;
   editReview: UseMutationResult<any, unknown, INewReview, unknown>;
   hasUserRating: () => boolean | undefined;
   findUserReview: (reviewUserId: number, list: any) => any;
   myReview: () => IReview | undefined | null;
+  isMoviesListLoading: boolean;
 }
 export interface IUserReview {
   id: number;

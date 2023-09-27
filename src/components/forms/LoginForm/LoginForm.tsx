@@ -37,7 +37,11 @@ export const LoginForm = () => {
         placeholder="Password"
         autoComplete="off"
       />
-      <button disabled={postUserLogin.isLoading} type="submit" className="btn-md">
+      <button
+        disabled={postUserLogin.isLoading}
+        type="submit"
+        className="btn-md"
+      >
         Login
       </button>
     </form>

@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 32px;
 
-  @media (min-width:992px) {
+  @media (min-width: 992px) {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 52px;

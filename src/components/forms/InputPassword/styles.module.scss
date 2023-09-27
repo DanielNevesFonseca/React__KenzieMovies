@@ -1,20 +1,19 @@
-.inputPasswordBox{
+.inputPasswordBox {
   display: flex;
   flex-direction: column;
   gap: 6px;
   position: relative;
 
   & > span {
-    color:var(--color-primary);
+    color: var(--color-primary);
     font-family: var(--font-body);
     font-size: 0.875rem;
   }
 
-  & > button{
+  & > button {
     position: absolute;
-    right: 4px;;
+    right: 4px;
     top: 13px;
     color: var(--color-primary);
   }
-
 }

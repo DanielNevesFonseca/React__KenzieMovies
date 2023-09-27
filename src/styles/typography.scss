@@ -1,4 +1,6 @@
-.title1, .title3, .menu-item {
+.title1,
+.title3,
+.menu-item {
   font-family: var(--font-title);
   font-weight: 700;
   color: var(--color-white);
@@ -12,7 +14,7 @@
   @media (max-width: 522px) {
     font-size: 1.3125rem;
   }
-} 
+}
 
 .title3 {
   font-size: 1.625rem;
@@ -20,13 +22,13 @@
 
 .text {
   color: var(--color-white);
-  font-family:var(--font-body);
+  font-family: var(--font-body);
   font-weight: 400;
   font-size: 1.125rem;
   line-height: 125%;
 }
 
-.tag{
+.tag {
   font-family: var(--font-title);
   font-size: 0.8rem;
   padding: 8px 28px;
@@ -34,9 +36,8 @@
   border-radius: 255px;
   cursor: default;
   text-transform: capitalize;
-  
+
   @media (max-width: 768px) {
     padding: 4px 22px;
-    
   }
 }

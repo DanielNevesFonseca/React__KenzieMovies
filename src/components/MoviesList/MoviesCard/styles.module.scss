@@ -16,11 +16,11 @@
     cursor: pointer;
   }
 
-  @media (min-width:769px) {
-    &:first-child{ 
+  @media (min-width: 769px) {
+    &:first-child {
       min-width: 100%;
       margin-bottom: 38px;
-      & > img{
+      & > img {
         height: 536px;
       }
     }
@@ -71,8 +71,9 @@
   }
 }
 
-.textBox, .rateBox{
-  @media (min-width:769px) {
+.textBox,
+.rateBox {
+  @media (min-width: 769px) {
     gap: 16px;
   }
 }

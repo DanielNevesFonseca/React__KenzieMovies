@@ -53,16 +53,15 @@ export const EditReviewModal = () => {
               max: 10,
               min: 0,
               valueAsNumber: true,
-              value: isEditModalOpen?.score
+              value: isEditModalOpen?.score,
             })}
-            
             error={errors?.score}
           />
           <div className={`${styles.textareaBox}`}>
             <textarea
               autoComplete="off"
               {...register("description", {
-                value: isEditModalOpen?.description
+                value: isEditModalOpen?.description,
               })}
               className={`input`}
               placeholder="Leave a comment"
