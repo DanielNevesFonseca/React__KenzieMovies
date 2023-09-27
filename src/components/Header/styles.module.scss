@@ -1,4 +1,4 @@
-.header{
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,10 +6,63 @@
   height: 50px;
   width: 100%;
   gap: 24px;
-
-  & > a > img{
+  z-index: 100;
+  & > a > img {
     object-fit: contain;
     min-width: 50px;
     max-height: 50px;
+  }
+}
+
+.dynamicBox {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+
+  & > button {
+    color: var(--color-white);
+    padding: 0;
+
+    &:has(svg) {
+      svg {
+        transition: ease-in-out 0.3s;
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+    }
+  }
+}
+
+.firstLetterName {
+  height: 40px;
+  width: 40px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > p {
+    color: var(--color-white);
+    font-weight: bold;
+    font-family: var(--font-title);
+  }
+}
+
+.fullName {
+  font-family: var(--font-title);
+  color: var(--color-white);
+}
+
+.loginButton {
+  color: var(--color-white);
+
+  &:visited {
+    color: var(--color-white);
+  }
+
+  &:hover {
+    text-decoration: none;
   }
 }

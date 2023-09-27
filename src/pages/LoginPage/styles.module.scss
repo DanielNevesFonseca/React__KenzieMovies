@@ -1,0 +1,43 @@
+.sectionImg{
+  background-image: url("../../assets/images/background-image-login.svg");
+  min-height: calc(100% - 92px );
+  min-width: calc(100dvw - 5px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+}
+
+.main{
+  z-index: 100;
+  min-height: calc(100dvh - 270px);
+  display: flex;
+  align-items: center;
+}
+
+.loginSection{
+  background-color: var(--color-grey-2);
+  width: 100%;
+  max-width: 550px;
+  padding: 48px 66px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @media (max-width: 522px) {
+    padding: 24px 16px;
+  }
+}
+
+.registerBox {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+
+  & > span {
+    color: var(--color-grey-1);
+  }
+}

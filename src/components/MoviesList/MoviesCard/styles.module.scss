@@ -1,0 +1,78 @@
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.movieItem {
+  max-width: 100%;
+  @extend .flex-column;
+  gap: 26px;
+
+  & > img {
+    max-width: 100%;
+    object-fit: cover;
+    height: 185px;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+
+  @media (min-width:769px) {
+    &:first-child{ 
+      min-width: 100%;
+      margin-bottom: 38px;
+      & > img{
+        height: 536px;
+      }
+    }
+    flex: 1;
+    gap: 16;
+    & > img {
+      height: 216px;
+    }
+  }
+}
+
+.infoContainer {
+  display: flex;
+  max-width: 100%;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.textBox {
+  @extend .flex-column;
+  gap: 28px;
+  justify-content: space-between;
+
+  & > span {
+    width: fit-content;
+  }
+}
+
+.rateBox {
+  @extend .flex-column;
+  gap: 28px;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  & > p {
+    color: var(--color-grey-1);
+    font-weight: 600;
+  }
+}
+
+.ratingBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  & > svg {
+    color: var(--color-primary);
+  }
+}
+
+.textBox, .rateBox{
+  @media (min-width:769px) {
+    gap: 16px;
+  }
+}

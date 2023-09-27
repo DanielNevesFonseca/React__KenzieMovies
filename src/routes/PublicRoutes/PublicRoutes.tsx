@@ -1,12 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom"
 
 export const PublicRoutes = () => {
-  
-  const user = true;
-  
+
+  const userToken = localStorage.getItem("@Kenzie-Movie:user-token")
+
   return(
     <>
-    {!user ? <Outlet/> : <Navigate to={"/"}/>}
+    {!userToken ? <Outlet/> : <Navigate to={"/"}/>}
     </>
   )
 }
